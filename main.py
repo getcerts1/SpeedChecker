@@ -1,32 +1,22 @@
-import os
-import re
-import requests
-from pprint import pprint
+import time
+import core
 
 
-#get image
-URL = "https://thispersondoesnotexist.com"
-TEMP_MAIL_BASE = "https://api.mail.tm"
 
+#use the same credentials for creating account, token and inbox
 
-def get_image():
-    response = requests.get(url=URL)
-    with open("image.jpg", "wb") as file:
-        file.write(response.content)
+if __name__ == "__main__":
+    email = core.domain()
+    password = core.generate_password()
 
+    print(email)
+    print(password)
 
-def get_temp_mail():
-    response = requests.get(f"{TEMP_MAIL_BASE}/domains")
-    domain = response.json()["hydra:member"][0]["domain"]
-    return domain
+    while core.create_account() != "success":
+        core.create_account(email_=email, password_=password)
+    time.sleep(3)
 
-def create_account():
-    email = f"mytempmail@{get_temp_mail()}"
-    password = os.environ[""]
-
-
-pprint(get_temp_mail())
-
-
+    auth_header = core.get_auth_header(email, password)
+    core.inbox(auth_header)
 
 
