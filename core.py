@@ -30,7 +30,7 @@ def create_account(email_, password_):
 
     response = requests.post(f"{TEMP_MAIL_BASE}/accounts", json=data)
     if response.status_code == 201:
-        print("success")
+        return "success"
     elif response.status_code == 422:
         print("Account already exists")
     else:
