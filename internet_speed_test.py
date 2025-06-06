@@ -1,15 +1,12 @@
+#!/usr/bin/env python3
+
 import time
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, WebDriverException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from average_calc import average_calc
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option("detach", True)
-
-driver_instance = webdriver.Chrome(options=chrome_options)
 
 
 def speed_check(driver):
@@ -53,10 +50,6 @@ def speed_check(driver):
             errors += 1
 
         driver.quit()
-        print(speeds)
-        print(f"Successes: {successes}, Errors: {errors}")
-
         return print(average_calc(speeds))
 
 
-speed_check(driver_instance)

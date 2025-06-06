@@ -1,7 +1,12 @@
-import time
-import core
+from internet_speed_test import speed_check
+from selenium import webdriver
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option("detach", True)
 
 
+driver_instance = webdriver.Chrome(options=chrome_options)
+
+"""
 
 #use the same credentials for creating account, token and inbox
 
@@ -20,3 +25,7 @@ if __name__ == "__main__":
     core.inbox(auth_header)
 
 
+"""
+
+if __name__ == "__main__":
+    speed_check(driver_instance)
